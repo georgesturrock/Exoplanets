@@ -1,0 +1,1459 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CKOI\_DataPrep}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Exoplanet Classification Data
+Prep}\label{exoplanet-classification-data-prep}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Read Data}\label{read-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{cumulativeOOI} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/cumulativeooi.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    rowid     kepid kepoi\_name   kepler\_name koi\_disposition koi\_vet\_stat  \textbackslash{}
+        0      1  10797460  K00752.01  Kepler-227 b       CONFIRMED       Active   
+        1      2  10797460  K00752.02  Kepler-227 c       CONFIRMED       Active   
+        2      3  10811496  K00753.01           NaN       CANDIDATE       Active   
+        3      4  10848459  K00754.01           NaN  FALSE POSITIVE       Active   
+        4      5  10854555  K00755.01  Kepler-664 b       CONFIRMED       Active   
+        
+          koi\_vet\_date koi\_pdisposition  koi\_score  koi\_fpflag\_nt  koi\_fpflag\_ss  \textbackslash{}
+        0    8/16/2018        CANDIDATE      1.000              0              0   
+        1    8/16/2018        CANDIDATE      0.969              0              0   
+        2    8/16/2018        CANDIDATE      0.000              0              0   
+        3    8/16/2018   FALSE POSITIVE      0.000              0              1   
+        4    8/16/2018        CANDIDATE      1.000              0              0   
+        
+           koi\_fpflag\_co  koi\_fpflag\_ec        koi\_disp\_prov  \textbackslash{}
+        0              0              0  q1\_q17\_dr25\_sup\_koi   
+        1              0              0  q1\_q17\_dr25\_sup\_koi   
+        2              0              0  q1\_q17\_dr25\_sup\_koi   
+        3              0              0  q1\_q17\_dr25\_sup\_koi   
+        4              0              0  q1\_q17\_dr25\_sup\_koi   
+        
+                                                koi\_comment  koi\_period  koi\_time0bk  \textbackslash{}
+        0                                        NO\_COMMENT    9.488036   170.538750   
+        1                                        NO\_COMMENT   54.418383   162.513840   
+        2                                     DEEP\_V\_SHAPED   19.899140   175.850252   
+        3  MOD\_ODDEVEN\_DV---MOD\_ODDEVEN\_ALT---DEEP\_V\_SHAPED    1.736952   170.307565   
+        4                                        NO\_COMMENT    2.525592   171.595550   
+        
+             koi\_time0  koi\_eccen  koi\_longp  koi\_impact  koi\_duration  koi\_ingress  \textbackslash{}
+        0  2455003.539        0.0        NaN       0.146       2.95750          NaN   
+        1  2454995.514        0.0        NaN       0.586       4.50700          NaN   
+        2  2455008.850        0.0        NaN       0.969       1.78220          NaN   
+        3  2455003.308        0.0        NaN       1.276       2.40641          NaN   
+        4  2455004.596        0.0        NaN       0.701       1.65450          NaN   
+        
+           koi\_depth   koi\_ror  koi\_srho koi\_fittype  koi\_prad  koi\_sma  koi\_incl  \textbackslash{}
+        0      616.0  0.022344   3.20796     LS+MCMC      2.26   0.0853     89.66   
+        1      875.0  0.027954   3.02368     LS+MCMC      2.83   0.2734     89.57   
+        2    10800.0  0.154046   7.29555     LS+MCMC     14.60   0.1419     88.96   
+        3     8080.0  0.387394   0.22080     LS+MCMC     33.46   0.0267     67.09   
+        4      603.0  0.024064   1.98635     LS+MCMC      2.75   0.0374     85.41   
+        
+           koi\_teq  koi\_insol  koi\_dor                   koi\_limbdark\_mod  \textbackslash{}
+        0    793.0      93.59   24.810  Claret (2011 A\&A 529 75) ATLAS LS   
+        1    443.0       9.11   77.900  Claret (2011 A\&A 529 75) ATLAS LS   
+        2    638.0      39.30   53.500  Claret (2011 A\&A 529 75) ATLAS LS   
+        3   1395.0     891.96    3.278  Claret (2011 A\&A 529 75) ATLAS LS   
+        4   1406.0     926.16    8.750  Claret (2011 A\&A 529 75) ATLAS LS   
+        
+           koi\_ldm\_coeff4  koi\_ldm\_coeff3  koi\_ldm\_coeff2       {\ldots}        \textbackslash{}
+        0             0.0             0.0          0.2291       {\ldots}         
+        1             0.0             0.0          0.2291       {\ldots}         
+        2             0.0             0.0          0.2711       {\ldots}         
+        3             0.0             0.0          0.2865       {\ldots}         
+        4             0.0             0.0          0.2844       {\ldots}         
+        
+           koi\_quarters koi\_bin\_oedp\_sig                       koi\_trans\_mod  \textbackslash{}
+        0  1.111110e+31           0.6864  Mandel and Agol (2002 ApJ 580 171)   
+        1  1.111110e+31           0.0023  Mandel and Agol (2002 ApJ 580 171)   
+        2  1.111110e+31           0.6624  Mandel and Agol (2002 ApJ 580 171)   
+        3  1.111110e+31           0.0000  Mandel and Agol (2002 ApJ 580 171)   
+        4  1.111110e+30           0.3090  Mandel and Agol (2002 ApJ 580 171)   
+        
+           koi\_model\_dof  koi\_model\_chisq  \textbackslash{}
+        0            NaN              NaN   
+        1            NaN              NaN   
+        2            NaN              NaN   
+        3            NaN              NaN   
+        4            NaN              NaN   
+        
+                                            koi\_datalink\_dvr  \textbackslash{}
+        0  010/010797/010797460/dv/kplr010797460-20160209{\ldots}   
+        1  010/010797/010797460/dv/kplr010797460-20160209{\ldots}   
+        2  010/010811/010811496/dv/kplr010811496-20160209{\ldots}   
+        3  010/010848/010848459/dv/kplr010848459-20160209{\ldots}   
+        4  010/010854/010854555/dv/kplr010854555-20160209{\ldots}   
+        
+                                            koi\_datalink\_dvs  koi\_steff koi\_slogg  \textbackslash{}
+        0  010/010797/010797460/dv/kplr010797460-001-2016{\ldots}     5455.0     4.467   
+        1  010/010797/010797460/dv/kplr010797460-002-2016{\ldots}     5455.0     4.467   
+        2  010/010811/010811496/dv/kplr010811496-001-2016{\ldots}     5853.0     4.544   
+        3  010/010848/010848459/dv/kplr010848459-001-2016{\ldots}     5805.0     4.564   
+        4  010/010854/010854555/dv/kplr010854555-001-2016{\ldots}     6031.0     4.438   
+        
+           koi\_smet  koi\_srad koi\_smass  koi\_sage         koi\_sparprov         ra  \textbackslash{}
+        0      0.14     0.927     0.919       NaN  q1\_q17\_dr25\_stellar  291.93423   
+        1      0.14     0.927     0.919       NaN  q1\_q17\_dr25\_stellar  291.93423   
+        2     -0.18     0.868     0.961       NaN  q1\_q17\_dr25\_stellar  297.00482   
+        3     -0.52     0.791     0.836       NaN  q1\_q17\_dr25\_stellar  285.53461   
+        4      0.07     1.046     1.095       NaN  q1\_q17\_dr25\_stellar  288.75488   
+        
+                 dec  koi\_kepmag  koi\_gmag  koi\_rmag  koi\_imag  koi\_zmag  koi\_jmag  \textbackslash{}
+        0  48.141651      15.347    15.890    15.270    15.114    15.006    14.082   
+        1  48.141651      15.347    15.890    15.270    15.114    15.006    14.082   
+        2  48.134129      15.436    15.943    15.390    15.220    15.166    14.254   
+        3  48.285210      15.597    16.100    15.554    15.382    15.266    14.326   
+        4  48.226200      15.509    16.015    15.468    15.292    15.241    14.366   
+        
+          koi\_hmag  koi\_kmag  koi\_fwm\_stat\_sig  koi\_fwm\_sra  koi\_fwm\_sdec  \textbackslash{}
+        0   13.751    13.648             0.002    19.462294      48.14191   
+        1   13.751    13.648             0.003    19.462265      48.14199   
+        2   13.900    13.826             0.278    19.800321      48.13412   
+        3   13.911    13.809             0.000    19.035638      48.28521   
+        4   14.064    13.952             0.733    19.250326      48.22626   
+        
+           koi\_fwm\_srao  koi\_fwm\_sdeco  koi\_fwm\_prao  koi\_fwm\_pdeco  koi\_dicco\_mra  \textbackslash{}
+        0         0.430          0.940      -0.00020       -0.00055         -0.010   
+        1        -0.630          1.230       0.00066       -0.00105          0.390   
+        2        -0.021         -0.038       0.00070        0.00060         -0.025   
+        3        -0.111          0.002       0.00302       -0.00142         -0.249   
+        4        -0.010          0.230       0.00008       -0.00007          0.030   
+        
+           koi\_dicco\_mdec  koi\_dicco\_msky  koi\_dikco\_mra  koi\_dikco\_mdec  \textbackslash{}
+        0           0.200           0.200          0.080           0.310   
+        1           0.000           0.390          0.490           0.120   
+        2          -0.034           0.042          0.002          -0.027   
+        3           0.147           0.289         -0.257           0.099   
+        4          -0.090           0.100          0.070           0.020   
+        
+           koi\_dikco\_msky  
+        0           0.320  
+        1           0.500  
+        2           0.027  
+        3           0.276  
+        4           0.070  
+        
+        [5 rows x 83 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}              rowid         kepid    koi\_score  koi\_fpflag\_nt  koi\_fpflag\_ss  \textbackslash{}
+        count  9564.000000  9.564000e+03  8054.000000    9564.000000    9564.000000   
+        mean   4782.500000  7.690628e+06     0.480829       0.208595       0.232748   
+        std    2761.033321  2.653459e+06     0.476928       4.767290       0.422605   
+        min       1.000000  7.574500e+05     0.000000       0.000000       0.000000   
+        25\%    2391.750000  5.556034e+06     0.000000       0.000000       0.000000   
+        50\%    4782.500000  7.906892e+06     0.334000       0.000000       0.000000   
+        75\%    7173.250000  9.873066e+06     0.998000       0.000000       0.000000   
+        max    9564.000000  1.293514e+07     1.000000     465.000000       1.000000   
+        
+               koi\_fpflag\_co  koi\_fpflag\_ec     koi\_period  koi\_time0bk     koi\_time0  \textbackslash{}
+        count    9564.000000    9564.000000    9564.000000  9564.000000  9.564000e+03   
+        mean        0.197512       0.120033      75.671358   166.183251  2.454999e+06   
+        std         0.398142       0.325018    1334.744046    67.918960  6.791896e+01   
+        min         0.000000       0.000000       0.241843   120.515914  2.454954e+06   
+        25\%         0.000000       0.000000       2.733684   132.761718  2.454966e+06   
+        50\%         0.000000       0.000000       9.752831   137.224595  2.454970e+06   
+        75\%         0.000000       0.000000      40.715178   170.694603  2.455004e+06   
+        max         1.000000       1.000000  129995.778400  1472.522306  2.456306e+06   
+        
+               koi\_eccen  koi\_longp   koi\_impact  koi\_duration  koi\_ingress  \textbackslash{}
+        count     9201.0        0.0  9201.000000   9564.000000          0.0   
+        mean         0.0        NaN     0.735105      5.621606          NaN   
+        std          0.0        NaN     3.348832      6.471554          NaN   
+        min          0.0        NaN     0.000000      0.052000          NaN   
+        25\%          0.0        NaN     0.197000      2.437750          NaN   
+        50\%          0.0        NaN     0.537000      3.792600          NaN   
+        75\%          0.0        NaN     0.889000      6.276500          NaN   
+        max          0.0        NaN   100.806000    138.540000          NaN   
+        
+                  koi\_depth      koi\_ror     koi\_srho       koi\_prad      koi\_sma  \textbackslash{}
+        count  9.201000e+03  9201.000000  9243.000000    9201.000000  9201.000000   
+        mean   2.379245e+04     0.283646     9.164414     102.891778     0.223989   
+        std    8.224316e+04     3.306558    53.807967    3077.639126     0.566359   
+        min    0.000000e+00     0.001289     0.000040       0.080000     0.005900   
+        25\%    1.600000e+02     0.012341     0.229250       1.400000     0.037700   
+        50\%    4.210000e+02     0.021076     0.956720       2.390000     0.085100   
+        75\%    1.470000e+03     0.095348     2.897175      14.930000     0.214400   
+        max    1.540000e+06    99.870651   980.854190  200346.000000    44.989200   
+        
+                  koi\_incl       koi\_teq     koi\_insol       koi\_dor  koi\_ldm\_coeff4  \textbackslash{}
+        count  9200.000000   9201.000000  9.243000e+03   9201.000000          9201.0   
+        mean     82.469147   1085.385828  7.745737e+03     76.736333             0.0   
+        std      15.223627    856.351161  1.592047e+05    845.274598             0.0   
+        min       2.290000     25.000000  0.000000e+00      0.373000             0.0   
+        25\%      83.920000    539.000000  2.015000e+01      5.358000             0.0   
+        50\%      88.500000    878.000000  1.416000e+02     15.460000             0.0   
+        75\%      89.770000   1379.000000  8.702900e+02     45.370000             0.0   
+        max      90.000000  14667.000000  1.094755e+07  79614.000000             0.0   
+        
+               koi\_ldm\_coeff3  koi\_ldm\_coeff2  koi\_ldm\_coeff1  koi\_max\_sngle\_ev  \textbackslash{}
+        count          9201.0     9201.000000     9201.000000       8422.000000   
+        mean              0.0        0.254439        0.407617        176.846052   
+        std               0.0        0.064806        0.106076        770.902357   
+        min               0.0       -0.120600        0.125400          2.417437   
+        25\%               0.0        0.228600        0.326800          3.997856   
+        50\%               0.0        0.271100        0.392000          5.589751   
+        75\%               0.0        0.299800        0.464100         16.947631   
+        max               0.0        0.482200        0.948600      22982.162000   
+        
+               koi\_max\_mult\_ev  koi\_model\_snr    koi\_count  koi\_num\_transits  \textbackslash{}
+        count      8422.000000    9201.000000  9564.000000       8422.000000   
+        mean       1025.664672     259.895001     1.406315        385.006768   
+        std        4154.121620     795.806615     0.873289        545.756200   
+        min           7.105086       0.000000     1.000000          0.000000   
+        25\%          10.733030      12.000000     1.000000         41.000000   
+        50\%          19.254412      23.000000     1.000000        143.000000   
+        75\%          71.998003      78.000000     1.000000        469.000000   
+        max      120049.680000    9054.700000     7.000000       2664.000000   
+        
+               koi\_tce\_plnt\_num  koi\_quarters  koi\_bin\_oedp\_sig  koi\_model\_dof  \textbackslash{}
+        count       9218.000000  8.422000e+03       8054.000000            0.0   
+        mean           1.243654  9.151387e+30          0.409500            NaN   
+        std            0.664573  4.153749e+30          0.500793            NaN   
+        min            1.000000  1.000000e+15         -1.000000            NaN   
+        25\%            1.000000  1.111100e+31          0.134650            NaN   
+        50\%            1.000000  1.111110e+31          0.486600            NaN   
+        75\%            1.000000  1.111110e+31          0.810375            NaN   
+        max            8.000000  1.111110e+31          1.000000            NaN   
+        
+               koi\_model\_chisq     koi\_steff    koi\_slogg     koi\_smet     koi\_srad  \textbackslash{}
+        count              0.0   9201.000000  9201.000000  9178.000000  9201.000000   
+        mean               NaN   5706.823280     4.310157    -0.124431     1.728712   
+        std                NaN    796.857947     0.432606     0.282111     6.127185   
+        min                NaN   2661.000000     0.047000    -2.500000     0.109000   
+        25\%                NaN   5310.000000     4.218000    -0.260000     0.829000   
+        50\%                NaN   5767.000000     4.438000    -0.100000     1.000000   
+        75\%                NaN   6112.000000     4.543000     0.070000     1.345000   
+        max                NaN  15896.000000     5.364000     0.560000   229.908000   
+        
+                 koi\_smass  koi\_sage           ra          dec   koi\_kepmag  \textbackslash{}
+        count  9201.000000       0.0  9564.000000  9564.000000  9563.000000   
+        mean      1.023706       NaN   292.060163    43.810433    14.264606   
+        std       0.349447       NaN     4.766657     3.601243     1.385448   
+        min       0.000000       NaN   279.852720    36.577381     6.966000   
+        25\%       0.845000       NaN   288.660770    40.777173    13.440000   
+        50\%       0.974000       NaN   292.261125    43.677504    14.520000   
+        75\%       1.101000       NaN   295.859160    46.714611    15.322000   
+        max       3.735000       NaN   301.720760    52.336010    20.003000   
+        
+                  koi\_gmag     koi\_rmag     koi\_imag     koi\_zmag     koi\_jmag  \textbackslash{}
+        count  9523.000000  9555.000000  9410.000000  8951.000000  9539.000000   
+        mean     14.830501    14.221565    14.075138    13.991724    12.993311   
+        std       1.501885     1.383713     1.292573     1.230351     1.291912   
+        min       7.225000     7.101000     7.627000     6.702000     4.097000   
+        25\%      13.896500    13.393000    13.294000    13.276000    12.253000   
+        50\%      15.064000    14.471000    14.317500    14.254000    13.236000   
+        75\%      15.935500    15.275000    15.063000    14.943000    13.968000   
+        max      21.150000    19.960000    19.900000    17.403000    17.372000   
+        
+                  koi\_hmag    koi\_kmag  koi\_fwm\_stat\_sig  koi\_fwm\_sra  koi\_fwm\_sdec  \textbackslash{}
+        count  9539.000000  9539.00000       8488.000000  9058.000000   9058.000000   
+        mean     12.620604    12.54341          0.150994    19.471356     43.829239   
+        std       1.267215     1.26818          0.252648     0.319158      3.599553   
+        min       3.014000     2.31100          0.000000    18.657036     36.576888   
+        25\%      11.914500    11.84300          0.000000    19.243889     40.798688   
+        50\%      12.834000    12.74400          0.006000    19.484983     43.694115   
+        75\%      13.551000    13.48450          0.196250    19.726785     46.720630   
+        max      17.615000    17.03800          1.000000    20.114785     52.338190   
+        
+               koi\_fwm\_srao  koi\_fwm\_sdeco  koi\_fwm\_prao  koi\_fwm\_pdeco  \textbackslash{}
+        count   9109.000000    9109.000000   8734.000000    8747.000000   
+        mean      -0.316136      -0.165817     -0.000097      -0.000714   
+        std       20.254777      20.534655      0.058225       0.092987   
+        min     -742.430000    -417.900000     -4.000000      -6.000000   
+        25\%       -0.600000      -0.680000     -0.000210      -0.000220   
+        50\%       -0.000500      -0.034000      0.000000       0.000000   
+        75\%        0.570000       0.500000      0.000240       0.000240   
+        max      549.500000     712.500000      1.190000       5.000000   
+        
+               koi\_dicco\_mra  koi\_dicco\_mdec  koi\_dicco\_msky  koi\_dikco\_mra  \textbackslash{}
+        count    8965.000000     8965.000000     8965.000000    8994.000000   
+        mean       -0.012281       -0.045420        1.866561      -0.024244   
+        std         2.406550        2.573558        2.988742       2.382286   
+        min       -25.100000      -75.900000        0.000000     -27.800000   
+        25\%        -0.320000       -0.387000        0.170000      -0.310000   
+        50\%         0.000000        0.000000        0.610000      -0.004000   
+        75\%         0.309000        0.300000        2.160000       0.290000   
+        max        45.680000       27.500000       88.600000      46.570000   
+        
+               koi\_dikco\_mdec  koi\_dikco\_msky  
+        count     8994.000000     8994.000000  
+        mean        -0.076749        1.812566  
+        std          2.553758        2.986376  
+        min        -76.600000        0.000000  
+        25\%         -0.390000        0.210000  
+        50\%         -0.017000        0.583000  
+        75\%          0.300000        1.970000  
+        max         34.000000       89.600000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 9564 entries, 0 to 9563
+Data columns (total 83 columns):
+rowid                9564 non-null int64
+kepid                9564 non-null int64
+kepoi\_name           9564 non-null object
+kepler\_name          2299 non-null object
+koi\_disposition      9564 non-null object
+koi\_vet\_stat         9564 non-null object
+koi\_vet\_date         9564 non-null object
+koi\_pdisposition     9564 non-null object
+koi\_score            8054 non-null float64
+koi\_fpflag\_nt        9564 non-null int64
+koi\_fpflag\_ss        9564 non-null int64
+koi\_fpflag\_co        9564 non-null int64
+koi\_fpflag\_ec        9564 non-null int64
+koi\_disp\_prov        9564 non-null object
+koi\_comment          8355 non-null object
+koi\_period           9564 non-null float64
+koi\_time0bk          9564 non-null float64
+koi\_time0            9564 non-null float64
+koi\_eccen            9201 non-null float64
+koi\_longp            0 non-null float64
+koi\_impact           9201 non-null float64
+koi\_duration         9564 non-null float64
+koi\_ingress          0 non-null float64
+koi\_depth            9201 non-null float64
+koi\_ror              9201 non-null float64
+koi\_srho             9243 non-null float64
+koi\_fittype          9564 non-null object
+koi\_prad             9201 non-null float64
+koi\_sma              9201 non-null float64
+koi\_incl             9200 non-null float64
+koi\_teq              9201 non-null float64
+koi\_insol            9243 non-null float64
+koi\_dor              9201 non-null float64
+koi\_limbdark\_mod     9201 non-null object
+koi\_ldm\_coeff4       9201 non-null float64
+koi\_ldm\_coeff3       9201 non-null float64
+koi\_ldm\_coeff2       9201 non-null float64
+koi\_ldm\_coeff1       9201 non-null float64
+koi\_parm\_prov        9564 non-null object
+koi\_max\_sngle\_ev     8422 non-null float64
+koi\_max\_mult\_ev      8422 non-null float64
+koi\_model\_snr        9201 non-null float64
+koi\_count            9564 non-null int64
+koi\_num\_transits     8422 non-null float64
+koi\_tce\_plnt\_num     9218 non-null float64
+koi\_tce\_delivname    9218 non-null object
+koi\_quarters         8422 non-null float64
+koi\_bin\_oedp\_sig     8054 non-null float64
+koi\_trans\_mod        9201 non-null object
+koi\_model\_dof        0 non-null float64
+koi\_model\_chisq      0 non-null float64
+koi\_datalink\_dvr     9218 non-null object
+koi\_datalink\_dvs     9218 non-null object
+koi\_steff            9201 non-null float64
+koi\_slogg            9201 non-null float64
+koi\_smet             9178 non-null float64
+koi\_srad             9201 non-null float64
+koi\_smass            9201 non-null float64
+koi\_sage             0 non-null float64
+koi\_sparprov         9201 non-null object
+ra                   9564 non-null float64
+dec                  9564 non-null float64
+koi\_kepmag           9563 non-null float64
+koi\_gmag             9523 non-null float64
+koi\_rmag             9555 non-null float64
+koi\_imag             9410 non-null float64
+koi\_zmag             8951 non-null float64
+koi\_jmag             9539 non-null float64
+koi\_hmag             9539 non-null float64
+koi\_kmag             9539 non-null float64
+koi\_fwm\_stat\_sig     8488 non-null float64
+koi\_fwm\_sra          9058 non-null float64
+koi\_fwm\_sdec         9058 non-null float64
+koi\_fwm\_srao         9109 non-null float64
+koi\_fwm\_sdeco        9109 non-null float64
+koi\_fwm\_prao         8734 non-null float64
+koi\_fwm\_pdeco        8747 non-null float64
+koi\_dicco\_mra        8965 non-null float64
+koi\_dicco\_mdec       8965 non-null float64
+koi\_dicco\_msky       8965 non-null float64
+koi\_dikco\_mra        8994 non-null float64
+koi\_dikco\_mdec       8994 non-null float64
+koi\_dikco\_msky       8994 non-null float64
+dtypes: float64(60), int64(7), object(16)
+memory usage: 6.1+ MB
+
+    \end{Verbatim}
+
+    \paragraph{Drop Features}\label{drop-features}
+
+Features with the following characteristics will be dropped from the
+dataset: - all NULL or Zeroes - categorial features which offer no
+predictive ability - inject leakage
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}Drop Columns with all zeroes}
+        \PY{n}{cumulativeOOI} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}longp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}ingress}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}model\PYZus{}dof}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}model\PYZus{}chisq}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}sage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}Drop attributes with no predictive capability}
+        \PY{n}{cumulativeOOI} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rowid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kepoi\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}comment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}limbdark\PYZus{}mod}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}parm\PYZus{}prov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}trans\PYZus{}mod}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}datalink\PYZus{}dvr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}datalink\PYZus{}dvs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}Drop Columns which inject Leakage}
+        \PY{n}{cumulativeOOI} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}pdisposition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kepler\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}Drop other categorical columns for first pass modeling}
+        \PY{n}{cumulativeOOI} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}tce\PYZus{}delivname}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}sparprov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Uniqueness}\label{uniqueness}
+
+The uniques of each column will be examined as well. Columns with low or
+zero variance will be removed from the dataset.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{df} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{n}{dropna} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+kepid               8214
+koi\_disposition        3
+koi\_vet\_stat           1
+koi\_vet\_date           1
+koi\_fpflag\_nt          3
+koi\_fpflag\_ss          2
+koi\_fpflag\_co          2
+koi\_fpflag\_ec          2
+koi\_disp\_prov          1
+koi\_period          9564
+koi\_time0bk         9538
+koi\_time0           7445
+koi\_eccen              2
+koi\_impact          2407
+koi\_duration        7834
+koi\_depth           2854
+koi\_ror             8503
+koi\_srho            9003
+koi\_fittype            4
+koi\_prad            2989
+koi\_sma             3797
+koi\_incl            2261
+koi\_teq             2512
+koi\_insol           7802
+koi\_dor             6211
+koi\_ldm\_coeff4         2
+koi\_ldm\_coeff3         2
+koi\_ldm\_coeff2      1081
+koi\_ldm\_coeff1      1323
+koi\_max\_sngle\_ev    8422
+koi\_max\_mult\_ev     8423
+koi\_model\_snr       2741
+koi\_count              7
+koi\_num\_transits    1628
+koi\_tce\_plnt\_num       9
+koi\_quarters         118
+koi\_bin\_oedp\_sig    4876
+koi\_steff           2446
+koi\_slogg           1558
+koi\_smet             120
+koi\_srad            2290
+koi\_smass           1477
+ra                  8131
+dec                 8195
+koi\_kepmag          3888
+koi\_gmag            4179
+koi\_rmag            3918
+koi\_imag            3744
+koi\_zmag            3556
+koi\_jmag            3744
+koi\_hmag            3737
+koi\_kmag            3729
+koi\_fwm\_stat\_sig     930
+koi\_fwm\_sra         9031
+koi\_fwm\_sdec        9030
+koi\_fwm\_srao        2995
+koi\_fwm\_sdeco       2998
+koi\_fwm\_prao        1823
+koi\_fwm\_pdeco       1758
+koi\_dicco\_mra       1987
+koi\_dicco\_mdec      2010
+koi\_dicco\_msky      1736
+koi\_dikco\_mra       2075
+koi\_dikco\_mdec      2198
+koi\_dikco\_msky      1845
+dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}Drop Columns with zero or near zero variance}
+         \PY{n}{cumulativeOOI} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}vet\PYZus{}stat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}vet\PYZus{}date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}disp\PYZus{}prov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}ldm\PYZus{}coeff3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}ldm\PYZus{}coeff4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}cumulativeOOI.koi\PYZus{}ldm\PYZus{}coeff4.unique()}
+\end{Verbatim}
+
+
+    \paragraph{One Hot Encoding of
+koi\_fittype}\label{one-hot-encoding-of-koi_fittype}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}Creating Dummy variables for categorical variable \PYZsq{}Primary\PYZsq{} positions}
+         \PY{c+c1}{\PYZsh{}df2 = pd.get\PYZus{}dummies(df.Primary,prefix=\PYZsq{}Prim\PYZsq{}, prefix\PYZus{}sep=\PYZsq{}\PYZus{}\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}df = df.join(df2, how=\PYZsq{}inner\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}df.drop([\PYZsq{}Primary\PYZsq{}], axis=1, inplace=True)}
+         \PY{n}{fittypeEncode} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{koi\PYZus{}fittype}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ENC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{prefix\PYZus{}sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{cumulativeOOI} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{fittypeEncode}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}fittype}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Label Substitution for
+koi\_disposition}\label{label-substitution-for-koi_disposition}
+
+\begin{itemize}
+\tightlist
+\item
+  False Positive = 0
+\item
+  Confirmed = 1
+\item
+  Candidate = 2
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{koi\PYZus{}disposition}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['CANDIDATE' 'CONFIRMED' 'FALSE POSITIVE']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{l} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}disposition}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{label} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{tmpArray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{cumulativeOOI}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{tmpArray}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{n}{tmpArray}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{p}{,} \PY{n}{counter}\PY{p}{)}
+             \PY{n}{cumulativeOOI}\PY{p}{[}\PY{n}{l}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{cumulativeOOI}\PY{p}{[}\PY{n}{l}\PY{p}{]} \PY{o}{==} \PY{n}{tmpArray}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{p}{,} \PY{n}{counter}\PY{p}{,} \PY{n}{cumulativeOOI}\PY{p}{[}\PY{n}{l}\PY{p}{]}\PY{p}{)}
+             \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{label} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+koi\_disposition FALSE POSITIVE 0
+koi\_disposition CONFIRMED 1
+koi\_disposition CANDIDATE 2
+
+    \end{Verbatim}
+
+    \subsubsection{Missing Values}\label{missing-values}
+
+    \paragraph{Missing Values Function}\label{missing-values-function}
+
+Most machine learning algorithms do not accomodate to missing values.
+The amount and degree of missingness is assesed below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{rptMissingValues}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{k}{del} \PY{n}{df2}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{k}{pass}
+             
+             \PY{n}{df2} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{df2} \PY{o}{=} \PY{n}{df2}\PY{p}{[}\PY{n}{df2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n Missing}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{df2}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Missing}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{(}\PY{p}{(}\PY{n}{df2} \PY{o}{/} \PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+             \PY{n}{cm} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{light\PYZus{}palette}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{as\PYZus{}cmap}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{df2}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{background\PYZus{}gradient}\PY{p}{(}\PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{p}{)}
+             \PY{k}{return} \PY{n}{df2}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{background\PYZus{}gradient}\PY{p}{(}\PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{mv} \PY{o}{=} \PY{n}{rptMissingValues}\PY{p}{(}\PY{n}{cumulativeOOI}\PY{p}{)}
+         \PY{n}{mv}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} <pandas.io.formats.style.Styler at 0x7ff0440f6860>
+\end{Verbatim}
+            
+    \paragraph{Fill Missing Values with
+Zeroes}\label{fill-missing-values-with-zeroes}
+
+One simple approach to solving for missing values is to fill all NULLs
+with zero. If the missing values are valid missing values, this could be
+a good approach to solve for this issue. However, filling all NULLs with
+zero could have adverse impacts when classifying data which is not part
+of the training dataset.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{cumulativeFill} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{mv2} \PY{o}{=} \PY{n}{rptMissingValues}\PY{p}{(}\PY{n}{cumulativeFill}\PY{p}{)}
+         \PY{n}{mv2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <pandas.io.formats.style.Styler at 0x7ff00e524390>
+\end{Verbatim}
+            
+    Kepler object of interest 2306756 has several missing values. It will be
+spot checked to verify missing values where correctly filled.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{cumulativeFill}\PY{p}{[}\PY{n}{cumulativeFill}\PY{o}{.}\PY{n}{kepid} \PY{o}{==} \PY{l+m+mi}{2306756}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:}       kepid  koi\_disposition  koi\_fpflag\_nt  koi\_fpflag\_ss  koi\_fpflag\_co  \textbackslash{}
+         24  2306756                0              0              1              0   
+         
+             koi\_fpflag\_ec  koi\_period  koi\_time0bk    koi\_time0  koi\_eccen  \textbackslash{}
+         24              0  386.603053   166.342079  2454999.342        0.0   
+         
+             koi\_impact  koi\_duration  koi\_depth   koi\_ror  koi\_srho  koi\_prad  \textbackslash{}
+         24      0.9765        6.8057    24900.0  0.240528   4.63335      41.5   
+         
+             koi\_sma  koi\_incl  koi\_teq  koi\_insol  koi\_dor  koi\_ldm\_coeff2  \textbackslash{}
+         24   1.0719     89.95    297.0       1.84    332.0          0.2251   
+         
+             koi\_ldm\_coeff1  koi\_max\_sngle\_ev  koi\_max\_mult\_ev  koi\_model\_snr  \textbackslash{}
+         24          0.4707               0.0              0.0          994.0   
+         
+             koi\_count  koi\_num\_transits  koi\_tce\_plnt\_num  koi\_quarters  \textbackslash{}
+         24          1               0.0               1.0           0.0   
+         
+             koi\_bin\_oedp\_sig  koi\_steff  koi\_slogg  koi\_smet  koi\_srad  koi\_smass  \textbackslash{}
+         24               0.0     5543.0      4.081      0.44      1.58      1.103   
+         
+                    ra        dec  koi\_kepmag  koi\_gmag  koi\_rmag  koi\_imag  koi\_zmag  \textbackslash{}
+         24  292.27374  37.671558      12.394    12.933    12.322    12.163    12.094   
+         
+             koi\_jmag  koi\_hmag  koi\_kmag  koi\_fwm\_stat\_sig  koi\_fwm\_sra  koi\_fwm\_sdec  \textbackslash{}
+         24    11.151    10.808     10.72             0.002    19.484915     37.671579   
+         
+             koi\_fwm\_srao  koi\_fwm\_sdeco  koi\_fwm\_prao  koi\_fwm\_pdeco  koi\_dicco\_mra  \textbackslash{}
+         24        -0.008          0.067       -0.0007         0.0006          0.001   
+         
+             koi\_dicco\_mdec  koi\_dicco\_msky  koi\_dikco\_mra  koi\_dikco\_mdec  \textbackslash{}
+         24           0.037           0.037          0.001           0.163   
+         
+             koi\_dikco\_msky  ENC\_LS  ENC\_LS+MCMC  ENC\_MCMC  ENC\_none  
+         24           0.163       0            0         1         0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{cumulativeOOI}\PY{p}{[}\PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{kepid} \PY{o}{==} \PY{l+m+mi}{2306756}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}       kepid koi\_disposition  koi\_fpflag\_nt  koi\_fpflag\_ss  koi\_fpflag\_co  \textbackslash{}
+         24  2306756               0              0              1              0   
+         
+             koi\_fpflag\_ec  koi\_period  koi\_time0bk    koi\_time0  koi\_eccen  \textbackslash{}
+         24              0  386.603053   166.342079  2454999.342        0.0   
+         
+             koi\_impact  koi\_duration  koi\_depth   koi\_ror  koi\_srho  koi\_prad  \textbackslash{}
+         24      0.9765        6.8057    24900.0  0.240528   4.63335      41.5   
+         
+             koi\_sma  koi\_incl  koi\_teq  koi\_insol  koi\_dor  koi\_ldm\_coeff2  \textbackslash{}
+         24   1.0719     89.95    297.0       1.84    332.0          0.2251   
+         
+             koi\_ldm\_coeff1  koi\_max\_sngle\_ev  koi\_max\_mult\_ev  koi\_model\_snr  \textbackslash{}
+         24          0.4707               NaN              NaN          994.0   
+         
+             koi\_count  koi\_num\_transits  koi\_tce\_plnt\_num  koi\_quarters  \textbackslash{}
+         24          1               NaN               1.0           NaN   
+         
+             koi\_bin\_oedp\_sig  koi\_steff  koi\_slogg  koi\_smet  koi\_srad  koi\_smass  \textbackslash{}
+         24               NaN     5543.0      4.081      0.44      1.58      1.103   
+         
+                    ra        dec  koi\_kepmag  koi\_gmag  koi\_rmag  koi\_imag  koi\_zmag  \textbackslash{}
+         24  292.27374  37.671558      12.394    12.933    12.322    12.163    12.094   
+         
+             koi\_jmag  koi\_hmag  koi\_kmag  koi\_fwm\_stat\_sig  koi\_fwm\_sra  koi\_fwm\_sdec  \textbackslash{}
+         24    11.151    10.808     10.72             0.002    19.484915     37.671579   
+         
+             koi\_fwm\_srao  koi\_fwm\_sdeco  koi\_fwm\_prao  koi\_fwm\_pdeco  koi\_dicco\_mra  \textbackslash{}
+         24        -0.008          0.067       -0.0007         0.0006          0.001   
+         
+             koi\_dicco\_mdec  koi\_dicco\_msky  koi\_dikco\_mra  koi\_dikco\_mdec  \textbackslash{}
+         24           0.037           0.037          0.001           0.163   
+         
+             koi\_dikco\_msky  ENC\_LS  ENC\_LS+MCMC  ENC\_MCMC  ENC\_none  
+         24           0.163       0            0         1         0  
+\end{Verbatim}
+            
+    \paragraph{Fill Missing Values Using Multiple
+Imputation}\label{fill-missing-values-using-multiple-imputation}
+
+Multiple imputation is an advanced technique to deal with missingness in
+datasets. Multiple Imputation techniques seek to fill missing values
+with a value that preserves the natural variance of the dataset. This
+can be advantageous as it minimizes bias when imputing data. In this
+case, the fancyimpute package will utilize the K-nearest-neighbors
+algorithm to algorithmically fill missing values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{from} \PY{n+nn}{fancyimpute} \PY{k}{import} \PY{n}{KNN} \PY{k}{as} \PY{n}{fiKNN}
+         
+         \PY{n}{dfCols} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{cumulativeMice} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{fiKNN}\PY{p}{(}\PY{n}{k}\PY{o}{=}\PY{l+m+mi}{83}\PY{p}{)}\PY{o}{.}\PY{n}{complete}\PY{p}{(}\PY{n}{cumulativeOOI}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cumulativeMice}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{dfCols}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Imputing row 1/9564 with 0 missing, elapsed time: 40.302
+Imputing row 101/9564 with 0 missing, elapsed time: 40.309
+Imputing row 201/9564 with 2 missing, elapsed time: 40.311
+Imputing row 301/9564 with 0 missing, elapsed time: 40.312
+Imputing row 401/9564 with 0 missing, elapsed time: 40.325
+Imputing row 501/9564 with 0 missing, elapsed time: 40.337
+Imputing row 601/9564 with 0 missing, elapsed time: 40.349
+Imputing row 701/9564 with 0 missing, elapsed time: 40.355
+Imputing row 801/9564 with 0 missing, elapsed time: 40.362
+Imputing row 901/9564 with 0 missing, elapsed time: 40.370
+Imputing row 1001/9564 with 0 missing, elapsed time: 40.384
+Imputing row 1101/9564 with 0 missing, elapsed time: 40.387
+Imputing row 1201/9564 with 0 missing, elapsed time: 40.391
+Imputing row 1301/9564 with 0 missing, elapsed time: 40.398
+Imputing row 1401/9564 with 0 missing, elapsed time: 40.400
+Imputing row 1501/9564 with 0 missing, elapsed time: 40.404
+Imputing row 1601/9564 with 1 missing, elapsed time: 40.409
+Imputing row 1701/9564 with 0 missing, elapsed time: 40.414
+Imputing row 1801/9564 with 0 missing, elapsed time: 40.418
+Imputing row 1901/9564 with 2 missing, elapsed time: 40.425
+Imputing row 2001/9564 with 38 missing, elapsed time: 40.437
+Imputing row 2101/9564 with 2 missing, elapsed time: 40.443
+Imputing row 2201/9564 with 0 missing, elapsed time: 40.450
+Imputing row 2301/9564 with 0 missing, elapsed time: 40.455
+Imputing row 2401/9564 with 0 missing, elapsed time: 40.461
+Imputing row 2501/9564 with 0 missing, elapsed time: 40.464
+Imputing row 2601/9564 with 0 missing, elapsed time: 40.468
+Imputing row 2701/9564 with 0 missing, elapsed time: 40.474
+Imputing row 2801/9564 with 1 missing, elapsed time: 40.476
+Imputing row 2901/9564 with 2 missing, elapsed time: 40.478
+Imputing row 3001/9564 with 0 missing, elapsed time: 40.480
+Imputing row 3101/9564 with 0 missing, elapsed time: 40.486
+Imputing row 3201/9564 with 0 missing, elapsed time: 40.494
+Imputing row 3301/9564 with 0 missing, elapsed time: 40.497
+Imputing row 3401/9564 with 0 missing, elapsed time: 40.501
+Imputing row 3501/9564 with 0 missing, elapsed time: 40.504
+Imputing row 3601/9564 with 7 missing, elapsed time: 40.510
+Imputing row 3701/9564 with 0 missing, elapsed time: 40.527
+Imputing row 3801/9564 with 19 missing, elapsed time: 40.538
+Imputing row 3901/9564 with 0 missing, elapsed time: 40.567
+Imputing row 4001/9564 with 0 missing, elapsed time: 40.579
+Imputing row 4101/9564 with 19 missing, elapsed time: 40.601
+Imputing row 4201/9564 with 0 missing, elapsed time: 40.621
+Imputing row 4301/9564 with 2 missing, elapsed time: 40.637
+Imputing row 4401/9564 with 0 missing, elapsed time: 40.652
+Imputing row 4501/9564 with 0 missing, elapsed time: 40.661
+Imputing row 4601/9564 with 0 missing, elapsed time: 40.677
+Imputing row 4701/9564 with 0 missing, elapsed time: 40.696
+Imputing row 4801/9564 with 0 missing, elapsed time: 40.704
+Imputing row 4901/9564 with 0 missing, elapsed time: 40.712
+Imputing row 5001/9564 with 0 missing, elapsed time: 40.716
+Imputing row 5101/9564 with 0 missing, elapsed time: 40.721
+Imputing row 5201/9564 with 0 missing, elapsed time: 40.729
+Imputing row 5301/9564 with 7 missing, elapsed time: 40.737
+Imputing row 5401/9564 with 6 missing, elapsed time: 40.747
+Imputing row 5501/9564 with 0 missing, elapsed time: 40.761
+Imputing row 5601/9564 with 19 missing, elapsed time: 40.780
+Imputing row 5701/9564 with 0 missing, elapsed time: 40.787
+Imputing row 5801/9564 with 2 missing, elapsed time: 40.819
+Imputing row 5901/9564 with 0 missing, elapsed time: 40.861
+Imputing row 6001/9564 with 0 missing, elapsed time: 40.886
+Imputing row 6101/9564 with 5 missing, elapsed time: 40.914
+Imputing row 6201/9564 with 5 missing, elapsed time: 40.943
+Imputing row 6301/9564 with 0 missing, elapsed time: 40.973
+Imputing row 6401/9564 with 0 missing, elapsed time: 41.009
+Imputing row 6501/9564 with 11 missing, elapsed time: 41.044
+Imputing row 6601/9564 with 1 missing, elapsed time: 41.081
+Imputing row 6701/9564 with 5 missing, elapsed time: 41.114
+Imputing row 6801/9564 with 0 missing, elapsed time: 41.148
+Imputing row 6901/9564 with 5 missing, elapsed time: 41.180
+Imputing row 7001/9564 with 0 missing, elapsed time: 41.197
+Imputing row 7101/9564 with 1 missing, elapsed time: 41.215
+Imputing row 7201/9564 with 24 missing, elapsed time: 41.235
+Imputing row 7301/9564 with 19 missing, elapsed time: 41.260
+Imputing row 7401/9564 with 0 missing, elapsed time: 41.280
+Imputing row 7501/9564 with 1 missing, elapsed time: 41.290
+Imputing row 7601/9564 with 0 missing, elapsed time: 41.299
+Imputing row 7701/9564 with 0 missing, elapsed time: 41.310
+Imputing row 7801/9564 with 0 missing, elapsed time: 41.317
+Imputing row 7901/9564 with 0 missing, elapsed time: 41.327
+Imputing row 8001/9564 with 0 missing, elapsed time: 41.334
+Imputing row 8101/9564 with 7 missing, elapsed time: 41.343
+Imputing row 8201/9564 with 0 missing, elapsed time: 41.352
+Imputing row 8301/9564 with 1 missing, elapsed time: 41.365
+Imputing row 8401/9564 with 0 missing, elapsed time: 41.373
+Imputing row 8501/9564 with 0 missing, elapsed time: 41.379
+Imputing row 8601/9564 with 4 missing, elapsed time: 41.386
+Imputing row 8701/9564 with 0 missing, elapsed time: 41.393
+Imputing row 8801/9564 with 0 missing, elapsed time: 41.400
+Imputing row 8901/9564 with 1 missing, elapsed time: 41.406
+Imputing row 9001/9564 with 0 missing, elapsed time: 41.411
+Imputing row 9101/9564 with 0 missing, elapsed time: 41.414
+Imputing row 9201/9564 with 0 missing, elapsed time: 41.418
+Imputing row 9301/9564 with 0 missing, elapsed time: 41.423
+Imputing row 9401/9564 with 0 missing, elapsed time: 41.426
+Imputing row 9501/9564 with 0 missing, elapsed time: 41.431
+
+    \end{Verbatim}
+
+    No missing values exist after multiple imputation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{mv3} \PY{o}{=} \PY{n}{rptMissingValues}\PY{p}{(}\PY{n}{cumulativeMice}\PY{p}{)}
+         \PY{n}{mv3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <pandas.io.formats.style.Styler at 0x7ff00e3e4358>
+\end{Verbatim}
+            
+    Spot check object of interest 2306756 to verify all missing values have
+been filled.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{cumulativeMice}\PY{p}{[}\PY{n}{cumulativeMice}\PY{o}{.}\PY{n}{kepid} \PY{o}{==} \PY{l+m+mi}{2306756}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:}         kepid  koi\_disposition  koi\_fpflag\_nt  koi\_fpflag\_ss  koi\_fpflag\_co  \textbackslash{}
+         24  2306756.0              0.0            0.0            1.0            0.0   
+         
+             koi\_fpflag\_ec  koi\_period  koi\_time0bk    koi\_time0  koi\_eccen  \textbackslash{}
+         24            0.0  386.603053   166.342079  2454999.342        0.0   
+         
+             koi\_impact  koi\_duration  koi\_depth   koi\_ror  koi\_srho  koi\_prad  \textbackslash{}
+         24      0.9765        6.8057    24900.0  0.240528   4.63335      41.5   
+         
+             koi\_sma  koi\_incl  koi\_teq  koi\_insol  koi\_dor  koi\_ldm\_coeff2  \textbackslash{}
+         24   1.0719     89.95    297.0       1.84    332.0          0.2251   
+         
+             koi\_ldm\_coeff1  koi\_max\_sngle\_ev  koi\_max\_mult\_ev  koi\_model\_snr  \textbackslash{}
+         24          0.4707         27.065371       132.087117          994.0   
+         
+             koi\_count  koi\_num\_transits  koi\_tce\_plnt\_num  koi\_quarters  \textbackslash{}
+         24        1.0        384.611062               1.0  9.508400e+30   
+         
+             koi\_bin\_oedp\_sig  koi\_steff  koi\_slogg  koi\_smet  koi\_srad  koi\_smass  \textbackslash{}
+         24          0.477568     5543.0      4.081      0.44      1.58      1.103   
+         
+                    ra        dec  koi\_kepmag  koi\_gmag  koi\_rmag  koi\_imag  koi\_zmag  \textbackslash{}
+         24  292.27374  37.671558      12.394    12.933    12.322    12.163    12.094   
+         
+             koi\_jmag  koi\_hmag  koi\_kmag  koi\_fwm\_stat\_sig  koi\_fwm\_sra  koi\_fwm\_sdec  \textbackslash{}
+         24    11.151    10.808     10.72             0.002    19.484915     37.671579   
+         
+             koi\_fwm\_srao  koi\_fwm\_sdeco  koi\_fwm\_prao  koi\_fwm\_pdeco  koi\_dicco\_mra  \textbackslash{}
+         24        -0.008          0.067       -0.0007         0.0006          0.001   
+         
+             koi\_dicco\_mdec  koi\_dicco\_msky  koi\_dikco\_mra  koi\_dikco\_mdec  \textbackslash{}
+         24           0.037           0.037          0.001           0.163   
+         
+             koi\_dikco\_msky  ENC\_LS  ENC\_LS+MCMC  ENC\_MCMC  ENC\_none  
+         24           0.163     0.0          0.0       1.0       0.0  
+\end{Verbatim}
+            
+    \subsubsection{Create Test and Train Data
+Sets}\label{create-test-and-train-data-sets}
+
+    Test and Train data sets are created to facilitate model development and
+predictions. The models will be built using the training data sets. The
+training data set contains all objects of interest which have already
+been classified by NASA. This will allow for the machine learning model
+to be tuned using known outcomes. All objects of interest with a
+koi\_disposition of "CANDIDATE" have not yet been confirmed as being an
+exoplanet. These observations will become the test dataset where a
+probability of being a exoplanet will be assigned using the model built
+using the train data set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}Create Test and Train Data Sets}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}cumulativeOOI}
+         \PY{n}{exoTest} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{p}{[}\PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{koi\PYZus{}disposition} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{exoTrain} \PY{o}{=} \PY{n}{cumulativeOOI}\PY{p}{[}\PY{n}{cumulativeOOI}\PY{o}{.}\PY{n}{koi\PYZus{}disposition} \PY{o}{!=} \PY{l+m+mi}{2}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}cumulativeFill}
+         \PY{n}{exoTestFill} \PY{o}{=} \PY{n}{cumulativeFill}\PY{p}{[}\PY{n}{cumulativeFill}\PY{o}{.}\PY{n}{koi\PYZus{}disposition} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{exoTrainFill} \PY{o}{=} \PY{n}{cumulativeFill}\PY{p}{[}\PY{n}{cumulativeFill}\PY{o}{.}\PY{n}{koi\PYZus{}disposition} \PY{o}{!=} \PY{l+m+mi}{2}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}cumulativeMice}
+         \PY{n}{exoTestMice} \PY{o}{=} \PY{n}{cumulativeMice}\PY{p}{[}\PY{n}{cumulativeMice}\PY{o}{.}\PY{n}{koi\PYZus{}disposition} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{exoTrainMice} \PY{o}{=} \PY{n}{cumulativeMice}\PY{p}{[}\PY{n}{cumulativeMice}\PY{o}{.}\PY{n}{koi\PYZus{}disposition} \PY{o}{!=} \PY{l+m+mi}{2}\PY{p}{]}
+\end{Verbatim}
+
+
+    Verify the shape of test and train datasets to assure the expected
+number of records and columns exist in each.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exoTest Shape}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{exoTest}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exoTrain Shape}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{exoTrain}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exoTestFill Shape}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{exoTestFill}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exoTrainFill Shape}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{exoTrainFill}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exoTestMice Shape}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{exoTestMice}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{exoTrainMice Shape}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{exoTrainMice}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+exoTest Shape (2426, 63)
+exoTrain Shape (7138, 63)
+exoTestFill Shape (2426, 63)
+exoTrainFill Shape (7138, 63)
+exoTestMice Shape (2426, 63)
+exoTrainMice Shape (7138, 63)
+
+    \end{Verbatim}
+
+    Split the response (y) and explantory (X) features in preparation of
+model training. Save the kepler ID for the test and train datasets for
+future use. The disposition and kepler ID will then be dropped as these
+inject leakage into the model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{}Split X, y / explantory, reponse variables}
+         
+         \PY{c+c1}{\PYZsh{}save kepid}
+         \PY{n}{exoTestX\PYZus{}kepid} \PY{o}{=} \PY{n}{exoTest}\PY{o}{.}\PY{n}{kepid}
+         \PY{n}{exoTrainX\PYZus{}kepid} \PY{o}{=} \PY{n}{exoTrain}\PY{o}{.}\PY{n}{kepid}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}cumulativeOOI}
+         \PY{n}{exoTestY} \PY{o}{=} \PY{n}{exoTest}\PY{o}{.}\PY{n}{koi\PYZus{}disposition}
+         \PY{n}{exoTestX} \PY{o}{=} \PY{n}{exoTest}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}disposition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kepid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{exoTrainY} \PY{o}{=} \PY{n}{exoTrain}\PY{o}{.}\PY{n}{koi\PYZus{}disposition}
+         \PY{n}{exoTrainX} \PY{o}{=} \PY{n}{exoTrain}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}disposition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kepid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{svCols} \PY{o}{=} \PY{n}{exoTrainX}\PY{o}{.}\PY{n}{columns}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}cumulativeFill}
+         \PY{n}{exoTestFillY} \PY{o}{=} \PY{n}{exoTestFill}\PY{o}{.}\PY{n}{koi\PYZus{}disposition}
+         \PY{n}{exoTestFillX} \PY{o}{=} \PY{n}{exoTestFill}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}disposition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kepid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{exoTrainFillY} \PY{o}{=} \PY{n}{exoTrainFill}\PY{o}{.}\PY{n}{koi\PYZus{}disposition}
+         \PY{n}{exoTrainFillX} \PY{o}{=} \PY{n}{exoTrainFill}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}disposition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kepid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}cumulativeMice}
+         \PY{n}{exoTestMiceY} \PY{o}{=} \PY{n}{exoTestMice}\PY{o}{.}\PY{n}{koi\PYZus{}disposition}
+         \PY{n}{exoTestMiceX} \PY{o}{=} \PY{n}{exoTestMice}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}disposition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kepid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{exoTrainMiceY} \PY{o}{=} \PY{n}{exoTrainMice}\PY{o}{.}\PY{n}{koi\PYZus{}disposition}
+         \PY{n}{exoTrainMiceX} \PY{o}{=} \PY{n}{exoTrainMice}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{koi\PYZus{}disposition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kepid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{svCols}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} 61
+\end{Verbatim}
+            
+    Scale the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}Scale Data}
+         \PY{n}{scaler} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+         \PY{n}{scaledTestFillX} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{exoTestFillX}\PY{p}{)}
+         \PY{n}{scaledTrainFillX} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{exoTrainFillX}\PY{p}{)}
+         \PY{n}{scaledTestMiceX} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{exoTestMiceX}\PY{p}{)}
+         \PY{n}{scaledTrainMiceX} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{exoTrainMiceX}\PY{p}{)}
+\end{Verbatim}
+
+
+    Convert the scaled data back to dataframes with the correct column
+headers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{}Convert scaled objects to dataframes}
+         \PY{n}{df\PYZus{}scaledTestFillX} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{scaledTestFillX}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{svCols}\PY{p}{)}
+         \PY{n}{df\PYZus{}scaledTrainFillX} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{scaledTrainFillX}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{svCols}\PY{p}{)}
+         \PY{n}{df\PYZus{}scaledTestMiceX} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{scaledTestMiceX}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{svCols}\PY{p}{)}
+         \PY{n}{df\PYZus{}scaledTrainMiceX} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{scaledTrainMiceX}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{svCols}\PY{p}{)}
+\end{Verbatim}
+
+
+    Save the scaled dataframes to pickle files for future use. This also
+allows us the ability to skip the data cleansing portion of the program
+if necessary.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}Save to pickle files}
+         \PY{n}{exoTrainX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTrainX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTestX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTestX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}Zero Filled DataFrames}
+         \PY{n}{df\PYZus{}scaledTestFillX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/df\PYZus{}scaledTestFillX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}scaledTrainFillX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/df\PYZus{}scaledTrainFillX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTestFillX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTestFillX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTrainFillX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTrainFillX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}MICE filled Dataframes}
+         \PY{n}{df\PYZus{}scaledTestMiceX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/df\PYZus{}scaledTestMiceX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}scaledTrainMiceX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/df\PYZus{}scaledTrainMiceX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTestMiceX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTestMiceX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTrainMiceX}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTrainMiceX.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Write kepler IDs to pickle files}
+         \PY{n}{exoTestX\PYZus{}kepid}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTestX\PYZus{}kepid.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTrainX\PYZus{}kepid}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTrainX\PYZus{}kepid.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Write response variables to pickle files}
+         \PY{n}{exoTestFillY}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTestFillY.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTrainFillY}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTrainFillY.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTestMiceY}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTestMiceY.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTrainMiceY}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTrainMiceY.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTestY}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTestY.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{exoTrainY}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./pkl/exoTrainY.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Spot check the scaled dataframe.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{df\PYZus{}scaledTrainMiceX}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:}    koi\_fpflag\_nt  koi\_fpflag\_ss  koi\_fpflag\_co  koi\_fpflag\_ec  koi\_period  \textbackslash{}
+         0      -0.050642      -0.672744      -0.599898      -0.437782   -0.381155   
+         1      -0.050642      -0.672744      -0.599898      -0.437782    0.013289   
+         2      -0.050642       1.486450      -0.599898      -0.437782   -0.449202   
+         3      -0.050642      -0.672744      -0.599898      -0.437782   -0.442278   
+         4      -0.050642      -0.672744      -0.599898      -0.437782   -0.367053   
+         
+            koi\_time0bk  koi\_time0  koi\_eccen  koi\_impact  koi\_duration  koi\_depth  \textbackslash{}
+         0     0.121114   0.121118        0.0   -0.191773     -0.410556  -0.327825   
+         1    -0.004602  -0.004600        0.0   -0.055849     -0.188747  -0.325031   
+         2     0.117493   0.117499        0.0    0.157306     -0.489444  -0.247302   
+         3     0.137670   0.137677        0.0   -0.020323     -0.597079  -0.327965   
+         4     0.131491   0.131489        0.0   -0.070677     -0.176222  -0.318072   
+         
+             koi\_ror  koi\_srho  koi\_prad   koi\_sma  koi\_incl   koi\_teq  koi\_insol  \textbackslash{}
+         0 -0.088493 -0.082259 -0.032953 -0.369817  0.528955 -0.417069  -0.053892   
+         1 -0.086738 -0.085916 -0.032776  0.267632  0.523538 -0.801560  -0.054358   
+         2  0.025717 -0.141542 -0.023270 -0.568405 -0.829372  0.244256  -0.049481   
+         3 -0.087955 -0.106503 -0.032801 -0.532144  0.273178  0.256340  -0.049292   
+         4 -0.083977 -0.132563 -0.032444 -0.322711  0.435671 -0.370930  -0.053774   
+         
+             koi\_dor  koi\_ldm\_coeff2  koi\_ldm\_coeff1  koi\_max\_sngle\_ev  \textbackslash{}
+         0 -0.216185       -0.413408        0.524848         -0.246799   
+         1  0.145585       -0.413408        0.524848         -0.244535   
+         2 -0.362909        0.475996       -0.461441         -0.206197   
+         3 -0.325622        0.443457       -0.362529         -0.247260   
+         4 -0.273765        0.513184       -0.503831         -0.242119   
+         
+            koi\_max\_mult\_ev  koi\_model\_snr  koi\_count  koi\_num\_transits  \textbackslash{}
+         0        -0.266899      -0.333146   0.664082         -0.497914   
+         1        -0.268760      -0.344364   0.664082         -0.707206   
+         2        -0.152599       0.193865  -0.452577          0.358929   
+         3        -0.265848      -0.327425  -0.452577          0.169315   
+         4        -0.260947      -0.298708   1.780740         -0.581989   
+         
+            koi\_tce\_plnt\_num  koi\_quarters  koi\_bin\_oedp\_sig  koi\_steff  koi\_slogg  \textbackslash{}
+         0         -0.355406      0.485948          0.581059  -0.334384   0.369605   
+         1          1.246530      0.485948         -0.767106  -0.334384   0.369605   
+         2         -0.355406      0.485948         -0.771639   0.091986   0.589480   
+         3         -0.355406     -2.007459         -0.162688   0.367299   0.303869   
+         4         -0.355406     -2.007461         -0.579494   0.385572   0.412673   
+         
+            koi\_smet  koi\_srad  koi\_smass        ra       dec  koi\_kepmag  koi\_gmag  \textbackslash{}
+         0  0.977938 -0.135324  -0.307612 -0.047347  1.236997    0.785766  0.712524   
+         1  0.977938 -0.135324  -0.307612 -0.047347  1.236997    0.785766  0.712524   
+         2 -1.365194 -0.156704  -0.540428 -1.393939  1.277212    0.962816  0.850083   
+         3  0.729424 -0.116616   0.186070 -0.716338  1.260682    0.900494  0.794404   
+         4  0.196894 -0.128250   0.068260  0.868369  1.260253    1.045675  0.937858   
+         
+            koi\_rmag  koi\_imag  koi\_zmag  koi\_jmag  koi\_hmag  koi\_kmag  \textbackslash{}
+         0  0.762694  0.812208  0.861562  0.844909  0.891242  0.871882   
+         1  0.762694  0.812208  0.861562  0.844909  0.891242  0.871882   
+         2  0.964216  1.017147  1.075407  1.030458  1.015123  0.996578   
+         3  0.903192  0.948324  1.054845  1.060875  1.133585  1.107332   
+         4  1.051495  1.101264  1.219341  1.184067  1.171523  1.246744   
+         
+            koi\_fwm\_stat\_sig  koi\_fwm\_sra  koi\_fwm\_sdec  koi\_fwm\_srao  koi\_fwm\_sdeco  \textbackslash{}
+         0         -0.573011    -0.044485      1.237201      0.034609       0.047893   
+         1         -0.568559    -0.044577      1.237223     -0.011659       0.060382   
+         2         -0.581915    -1.400747      1.277345      0.010995       0.007496   
+         3          2.681568    -0.718293      1.260831      0.015403       0.017315   
+         4          0.077339     0.877728      1.260397      0.010602       0.013439   
+         
+            koi\_fwm\_prao  koi\_fwm\_pdeco  koi\_dicco\_mra  koi\_dicco\_mdec  koi\_dicco\_msky  \textbackslash{}
+         0     -0.000725       0.002980       0.003041        0.088529       -0.586695   
+         1      0.012621      -0.001874       0.157339        0.016723       -0.527572   
+         2      0.049245      -0.005466      -0.089152        0.069500       -0.559000   
+         3      0.003620       0.007639       0.018471       -0.015590       -0.617812   
+         4      0.002999      -0.196622       0.022328       -0.008409       -0.624035   
+         
+            koi\_dikco\_mra  koi\_dikco\_mdec  koi\_dikco\_msky    ENC\_LS  ENC\_LS+MCMC  \textbackslash{}
+         0       0.038529        0.142112       -0.542492 -0.104427     0.412742   
+         1       0.196293        0.073679       -0.486625 -0.104427     0.412742   
+         2      -0.091145        0.066115       -0.556148 -0.104427     0.412742   
+         3       0.034682        0.037661       -0.620085 -0.104427     0.412742   
+         4       0.000050        0.001643       -0.616981 -0.104427     0.412742   
+         
+            ENC\_MCMC  ENC\_none  
+         0  -0.32948 -0.195588  
+         1  -0.32948 -0.195588  
+         2  -0.32948 -0.195588  
+         3  -0.32948 -0.195588  
+         4  -0.32948 -0.195588  
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
